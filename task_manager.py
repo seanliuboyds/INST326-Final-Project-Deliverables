@@ -1,8 +1,5 @@
 """
-A simple command-line task manager application.
-
-This module provides classes for managing standard and urgent tasks,
-saving them to, and loading them from a JSON file.
+To-do-list Project: Created a simple CMD style task manager to further our understanding of object oriented programming.
 """
 
 import sys
@@ -192,7 +189,11 @@ def main():
         
         if choice == "1":
             title = input("Task title: ").strip()
-            urgent = input("Urgent? (y/n): ").strip().lower() == "y"
+            urgent = input("Urgent? (y/n): ").strip().lower()
+            while urgent not in ("y", "n", "Y", "N"):
+                print("Please enter a valid value")
+                urgent = input("Urgent? (y/n): ").strip().lower()
+            urgent = urgent == "y"
             manager.add_task(title, urgent)
         elif choice == "2":
             manager.view_tasks()
@@ -203,7 +204,7 @@ def main():
                     number = int(input("Task number: "))
                     manager.complete_task(number)
                 except ValueError:
-                    print("Please enter a valid number")
+                    print("Invalid task number")
         elif choice == "4":
             manager.view_tasks()
             if manager.tasks:
@@ -211,7 +212,7 @@ def main():
                     number = int(input("Task number: "))
                     manager.delete_task(number)
                 except ValueError:
-                    print("Please enter a valid number.")
+                    print("Invalid task number")
         elif choice == "5":
             print("GOODBYE!!!")
             break
